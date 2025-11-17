@@ -1,1 +1,0 @@
-# akify-public
