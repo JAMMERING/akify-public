@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script>
+    const originalPath = window.location.pathname;
+
+    // /merchandise/* 경로 처리
+    if (originalPath.startsWith('/merchandise/') && originalPath !== '/merchandise/index.html') {
+      // 원래 URL을 히스토리에 유지하면서 index.html 로드
+      fetch('/merchandise/index.html')
+        .then(response => response.text())
+        .then(html => {
+          // 현재 문서를 index.html 내용으로 교체
+          document.open();
+          document.write(html);
+          document.close();
+
+          // URL은 /merchandise/214 그대로 유지
+          window.history.replaceState(null, '', originalPath + window.location.search + window.location.hash);
+        })
+        .catch(() => {
+          // fetch 실패 시 일반 리다이렉트
+          window.location.replace('https://akify.io/404');
+        });
+    } else {
+      // 그 외 모든 404는 akify.io/404로 리다이렉트
+      window.location.replace('https://akify.io/404');
+    }
+  </script>
+</head>
+<body>
+  <p>Loading...</p>
+</body>
+</html>
