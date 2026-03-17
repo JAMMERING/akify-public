@@ -7,6 +7,13 @@
 
     <!-- iOS Smart App Banner -->
     <meta name="apple-itunes-app" content="app-id=6751454780" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" />
+
     <script>
       // Smart App Banner에 현재 URL을 전달하도록 동적 설정
       (function() {
@@ -17,174 +24,266 @@
         }
       })();
     </script>
+
     <style>
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
+
       body {
-        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family: 'Poppins', 'Pretendard', system-ui, sans-serif;
         margin: 0;
-        padding: 24px;
-        background: #1E1E1F;
+        padding: 0;
+        background: #0a0a0a;
         color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         min-height: 100vh;
-      }
-      .card {
-        width: 100%;
-        max-width: 500px;
-        padding: 48px;
-        background: #1E1E1F;
-        overflow: hidden;
-        border-radius: 36px;
-        outline: 1px rgba(255, 255, 255, 0.10) solid;
-        outline-offset: -1px;
         display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-      .head {
-        padding: 8px 16px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 16px;
-        display: inline-flex;
-        align-self: flex-start;
         justify-content: center;
-        align-items: center;
-        gap: 10px;
+        overflow-x: hidden;
       }
-      .head-text {
-        color: white;
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px;
-        word-wrap: break-word;
-      }
-      .text-group {
+
+      .index {
+        width: 100%;
+        max-width: 384px;
+        min-height: 100vh;
+        padding: 0 16px;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      /* ── Leading Section ── */
+      .leading-section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 48px;
+      }
+
+      .head-group {
+        padding-top: 56px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         gap: 12px;
       }
-      .title {
-        color: white;
-        font-size: 32px;
-        font-weight: 700;
-        line-height: 40px;
-        word-wrap: break-word;
+
+      .logotype svg {
+        display: block;
+        width: 144px;
+        height: 32px;
       }
-      .text {
-        color: white;
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 20px;
-        word-wrap: break-word;
-      }
-      .merchandise-id {
-        color: #7E7E7E;
-        font-size: 14px;
+
+      .id-card {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 6px 12px;
+        background: #18181b;
+        border-radius: 8px;
+        font-family: 'Pretendard', sans-serif;
+        font-size: 12px;
         font-weight: 500;
         line-height: 16px;
-        word-wrap: break-word;
+        color: #94969C;
       }
-      .button-group {
+
+      .title-group {
         display: flex;
         flex-direction: column;
-        gap: 14px;
+        align-items: center;
+        text-align: center;
       }
-      .button {
-        padding: 16px;
+
+      .title-group .title {
+        font-family: 'Pretendard', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 36px;
+        color: white;
+      }
+
+      .title-group .description {
+        font-family: 'Pretendard', sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+        background: linear-gradient(to right, #ffffff, #6D6D6D);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* ── Button Group ── */
+      .button-group {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 12px;
+        position: relative;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
         overflow: hidden;
-        border-radius: 16px;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+        text-align: left;
+        transition: transform 0.1s;
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .btn-primary {
+        background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
+        box-shadow: inset 2px 2px 4px 0 rgba(255,255,255,0.10);
+        outline: 1px solid rgba(255,255,255,0.2);
+        outline-offset: -1px;
+      }
+
+      .btn-secondary {
+        background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
+        outline: 1px solid rgba(255,255,255,0.1);
+        outline-offset: -1px;
+      }
+
+      .btn .app-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 8px;
+        outline: 1px solid rgba(255,255,255,0.2);
+        outline-offset: -1px;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .btn .app-icon img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .btn .icon-left {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        color: #94969C;
+      }
+
+      .btn .text-group {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .btn .text-group .label {
+        font-family: 'Poppins', sans-serif;
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 16px;
+        color: #94969C;
+      }
+
+      .btn-primary .text-group .action {
+        font-family: 'Pretendard', sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 20px;
+        color: #D1FF54;
+      }
+
+      .btn-secondary .text-group .action {
+        font-family: 'Pretendard', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        color: white;
+      }
+
+      .btn .chip {
+        width: 28px;
+        height: 28px;
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
-        cursor: pointer;
-        border: none;
-        width: 100%;
-        font-family: inherit;
-        transition: transform 0.1s;
+        overflow: hidden;
+        flex-shrink: 0;
       }
-      .button:active {
-        transform: translateY(1px);
+
+      .btn-primary .chip {
+        background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, white 100%);
       }
-      .button.primary {
-        background: #D1FF54;
+
+      .btn-primary .chip svg {
+        color: #0a0a0a;
       }
-      .button.primary .button-text {
-        color: black;
-        font-size: 18px;
-        font-weight: 700;
-        word-wrap: break-word;
-      }
-      .button.secondary {
-        background: transparent;
-        outline: 1px rgba(255, 255, 255, 0.50) solid;
+
+      .btn-secondary .chip {
+        background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
+        outline: 1px solid rgba(255,255,255,0.1);
         outline-offset: -1px;
-        text-decoration: none;
       }
-      .button.secondary .button-text {
-        color: rgba(255, 255, 255, 0.80);
-        font-size: 18px;
-        font-weight: 700;
-        word-wrap: break-word;
+
+      .btn-secondary .chip svg {
+        color: #C1C2C5;
       }
-      .button.secondary-yellow {
-        background: transparent;
-        outline: 1px #D1FF54 solid;
-        outline-offset: -1px;
-        text-decoration: none;
+
+      .chip svg {
+        width: 20px;
+        height: 20px;
       }
-      .button.secondary-yellow .button-text {
-        color: #D1FF54;
-        font-size: 18px;
-        font-weight: 700;
-        word-wrap: break-word;
+
+      /* ── Footer ── */
+      .footer {
+        padding-bottom: 56px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
       }
-      .caption {
-        color: #636363;
-        font-size: 13px;
+
+      .footer .copyright,
+      .footer .contact {
+        font-family: 'Pretendard', sans-serif;
+        font-size: 12px;
         font-weight: 400;
-        line-height: 20px;
-        word-wrap: break-word;
-      }
-      .contact {
-        color: white;
-        font-size: 13px;
-        font-weight: 500;
-        word-wrap: break-word;
+        line-height: 16px;
+        color: #94969C;
         text-decoration: none;
-        cursor: pointer;
       }
-      .contact:hover {
+
+      .footer .contact:hover {
         text-decoration: underline;
       }
-
-      @media (max-width: 600px) {
-        .card {
-          padding: 32px 24px;
-        }
-        .title {
-          font-size: 28px;
-          line-height: 36px;
-        }
-      }
     </style>
+
     <script>
       const IOS_STORE = "https://apps.apple.com/kr/app/%EC%95%84%ED%82%A4%ED%8C%8C%EC%9D%B4/id6751454780";
-      const ANDROID_STORE =
-        "https://play.google.com/store/apps/details?id=com.jammering.akify";
-
+      const ANDROID_STORE = "https://play.google.com/store/apps/details?id=com.jammering.akify";
       const LANDING = "https://akify.io";
 
       function parsePostId() {
-        // /merchandise/123 → 123
-        const match = window.location.pathname.match(
-          /^\/merchandise\/([^/?#]+)/
-        );
+        const match = window.location.pathname.match(/^\/merchandise\/([^/?#]+)/);
         return match ? decodeURIComponent(match[1]) : null;
       }
 
@@ -199,9 +298,9 @@
       function init() {
         const { isAndroid, isIOS, isMobile } = detectEnv();
         const postId = parsePostId();
-        const idSpan = document.getElementById("post-id");
-        if (postId && idSpan) {
-          idSpan.textContent = postId;
+        const idValue = document.getElementById("post-id");
+        if (postId && idValue) {
+          idValue.textContent = postId;
         }
 
         // PC면 바로 랜딩 페이지로 보내기
@@ -210,50 +309,42 @@
           return;
         }
 
-        // 버튼 설정
+        // 페이지 진입 시 자동으로 앱 열기 1회 시도
+        if (postId) {
+          if (isIOS) {
+            window.location.href = `akify://merchandise/${postId}`;
+          } else if (isAndroid) {
+            const intentUrl = `intent://merchandise/${postId}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(window.location.href)};end`;
+            window.location.href = intentUrl;
+          }
+        }
+
         const openAppBtn = document.getElementById("open-app-btn");
         const storeBtn = document.getElementById("store-btn");
-        const landingLink = document.getElementById("landing-link");
 
-        // "앱에서 열기" 버튼 - 현재 URL로 앱 열기 시도
         openAppBtn.onclick = () => {
           const postId = parsePostId();
-
           if (isIOS) {
-            // iOS: 앱 스킴으로 직접 시도
             const appScheme = `akify://merchandise/${postId || ''}`;
-
-            // 방법 1: 직접 시도
             window.location.href = appScheme;
-
-            // 앱이 없을 경우를 대비해 2초 후 확인
             setTimeout(() => {
-              // 페이지가 여전히 포커스되어 있으면 앱이 없는 것
               if (!document.hidden) {
-                // 사용자에게 안내
                 if (confirm('앱이 설치되어 있지 않거나 실행할 수 없습니다.\nApp Store로 이동하시겠습니까?')) {
                   window.location.href = IOS_STORE;
                 }
               }
             }, 2000);
           } else if (isAndroid) {
-            // Android: Intent URL 사용 (Chrome 공식 방법)
             const currentUrl = window.location.href;
-
-            // 방법 1: Intent URL로 앱 열기 시도
             const intentUrl = `intent://merchandise/${postId || ''}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(currentUrl)};end`;
-
-            // 방법 2: 동시에 App Link도 시도 (fallback)
             try {
               window.location.href = intentUrl;
             } catch (e) {
-              // Intent URL 실패 시 HTTPS URL로 시도 (App Link)
               window.location.href = currentUrl;
             }
           }
         };
 
-        // "앱 설치하고 매물 보러 가기" 버튼 - 스토어로 이동
         storeBtn.onclick = () => {
           if (isIOS) {
             window.location.href = IOS_STORE;
@@ -263,39 +354,81 @@
             window.location.href = LANDING;
           }
         };
-
-        // "서비스 소개 페이지 보기" 버튼
-        landingLink.href = LANDING;
       }
 
       window.addEventListener("DOMContentLoaded", init);
     </script>
   </head>
   <body>
-    <div class="card">
-      <div class="head">
-        <div class="head-text">🔗 아키파이 매물 공유 링크</div>
+    <div class="index">
+      <!-- Leading Section -->
+      <div class="leading-section">
+        <div class="head-group">
+          <!-- Logotype -->
+          <div class="logotype">
+            <svg width="150" height="32" viewBox="0 0 150 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0)">
+                <path d="M81.6176 0.551758H69.4853V31.4483H81.6176V0.551758Z" fill="#94969C"/>
+                <path d="M31.8419 32C31.8419 32 31.9853 27.4648 31.9853 21.7269C31.9853 20.811 32.0404 17.7434 31.6213 14.3779C31.6213 14.3559 31.489 13.4069 31.489 13.4069C30.2537 5.80414 23.7243 0 15.8493 0C7.09191 0 0 7.16138 0 16C0 24.8386 7.09191 32 15.8493 32C18.5625 32 21.1103 31.3159 23.3382 30.1021L16.6103 16.7614L31.8419 32Z" fill="#94969C"/>
+                <path d="M66.1765 0.551758C59.2831 0.551758 52.864 2.52693 47.4265 5.94762V0.551758H35.2941V31.4483H47.4265V26.0524C52.864 29.4731 59.2831 31.4483 66.1765 31.4483V16.7835H50.7353L66.1765 12.3697V0.551758Z" fill="#94969C"/>
+                <path d="M115.809 0.551758C108.915 0.551758 102.496 2.549 97.0588 5.96969V0.551758H84.9265V31.4483H100.368V26.0524H115.809V16.7835H100.368L115.809 12.3697V0.551758Z" fill="#94969C"/>
+                <path d="M138.529 0.551758L132.551 12.8111L134.118 0.551758H119.118C119.118 6.51038 120.816 12.0607 123.739 16.7724H119.118V31.4483C124.743 31.4483 130.015 29.9366 134.559 27.2993C143.989 21.9366 150.077 11.3987 150 0.551758H138.529Z" fill="#94969C"/>
+              </g>
+              <defs>
+                <clipPath id="clip0">
+                  <rect width="150" height="32" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <!-- ID Card -->
+          <div class="id-card">
+            <span>매물 ID :</span>
+            <span id="post-id">알 수 없음</span>
+          </div>
+        </div>
+
+        <!-- Title -->
+        <div class="title-group">
+          <div class="title">앱에서 매물 상세를 확인해 주세요!</div>
+          <div class="description">아키파이 앱에서 매물 상세를 보기 위한 링크입니다.</div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+          <!-- 앱에서 보기 -->
+          <button class="btn btn-primary" id="open-app-btn">
+            <div class="app-icon">
+              <img src="../assets/image-app-icon.png" alt="AKIFY" />
+            </div>
+            <div class="text-group">
+              <span class="label">AKIFY App</span>
+              <span class="action">앱에서 보기</span>
+            </div>
+            <div class="chip">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 7l-10 10" /><path d="M8 7l9 0l0 9" /></svg>
+            </div>
+          </button>
+
+          <!-- 앱 설치하고 매물 보기 -->
+          <button class="btn btn-secondary" id="store-btn">
+            <svg class="icon-left" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M5.001 8h13.999a2 2 0 0 1 1.977 2.304l-1.255 7.152a3 3 0 0 1 -2.966 2.544h-9.512a3 3 0 0 1 -2.965 -2.544l-1.255 -7.152a2 2 0 0 1 1.977 -2.304" /><path d="M17 10l-2 -6" /><path d="M7 10l2 -6" /></svg>
+            <div class="text-group">
+              <span class="label">Download</span>
+              <span class="action">앱 설치하고 매물 보기</span>
+            </div>
+            <div class="chip">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
+            </div>
+          </button>
+        </div>
       </div>
-      <div class="text-group">
-        <div class="title">앱에서 매물 상세를 확인해 주세요!</div>
-        <div class="text">이 링크는 아키파이 앱에서 매물 상세를 보기 위한 링크입니다.</div>
-        <div class="merchandise-id">매물 ID: <span id="post-id">알 수 없음</span></div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <div class="copyright">2026 Jammering™ All Rights reserved.</div>
+        <a href="mailto:info@jammering.com" class="contact">문의: info@jammering.com</a>
       </div>
-      <div class="button-group">
-        <button class="button primary" id="open-app-btn">
-          <div class="button-text">앱에서 열기</div>
-        </button>
-        <button class="button secondary-yellow" id="store-btn">
-          <div class="button-text">앱 설치하고 매물 보러 가기</div>
-        </button>
-        <a class="button secondary" id="landing-link" target="_blank">
-          <div class="button-text">서비스 소개 페이지 보기</div>
-        </a>
-      </div>
-      <div class="caption">
-        이미 앱을 설치한 상태임에도 해당 페이지가 계속 보인다면, 로그인 후에 시도해 주세요. 문제가 지속적으로 발생할 시 아래 메일로 연락주시면 감사하겠습니다.
-      </div>
-      <a href="mailto:info@jammering.com" class="contact">문의: info@jammering.com</a>
     </div>
   </body>
 </html>
