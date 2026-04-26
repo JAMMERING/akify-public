@@ -25,7 +25,11 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
     }
 
     const pageUrl = new URL('/download/index.html', request.url);
-    return env.ASSETS.fetch(new Request(pageUrl.toString()));
+    const pageResponse = await env.ASSETS.fetch(pageUrl.toString());
+    if (!pageResponse.ok) {
+      return Response.redirect('https://akify.io', 302);
+    }
+    return pageResponse;
   } catch {
     return Response.redirect('https://akify.io', 302);
   }
