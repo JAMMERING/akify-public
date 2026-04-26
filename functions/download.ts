@@ -24,7 +24,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
       return Response.redirect(`${ANDROID_STORE}${referrer}`, 302);
     }
 
-    const pageUrl = new URL('/download/index.html', request.url);
+    const pageUrl = new URL('/dl/index.html', request.url);
     const pageResponse = await env.ASSETS.fetch(pageUrl.toString());
     if (!pageResponse.ok) {
       return Response.redirect('https://akify.io', 302);
