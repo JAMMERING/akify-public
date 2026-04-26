@@ -96,7 +96,7 @@ class HeadHandler {
     const { title, description, image } = this.meta;
     const tags = [
       `<meta property="og:type" content="product" />`,
-      `<meta property="og:site_name" content="AKIFY" />`,
+      `<meta property="og:site_name" content="아키파이 | 악기 매물 보기" />`,
       `<meta property="og:locale" content="ko_KR" />`,
       `<meta property="og:url" content="${escapeAttr(this.url)}" />`,
       `<meta property="og:title" content="${escapeAttr(title)}" />`,
