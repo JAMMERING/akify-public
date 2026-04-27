@@ -2,30 +2,21 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <title>AKIFY 매물 보기</title>
+    <title>AKIFY 앱 설치하기</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <script src="/assets/analytics.js"></script>
 
-    <!-- iOS Smart App Banner -->
-    <meta name="apple-itunes-app" content="app-id=6751454780" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="아키파이 | 악기 매물 보기" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:title" content="AKIFY 앱 설치하기" />
+    <meta property="og:description" content="휴대폰 카메라로 QR을 스캔하거나 스토어에서 AKIFY 앱을 설치하세요." />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" />
-
-    <script>
-      // Smart App Banner에 현재 URL을 전달하도록 동적 설정
-      (function() {
-        const currentUrl = window.location.href;
-        const metaTag = document.querySelector('meta[name="apple-itunes-app"]');
-        if (metaTag) {
-          metaTag.setAttribute('content', 'app-id=6751454780, app-argument=' + currentUrl);
-        }
-      })();
-    </script>
 
     <style>
       * {
@@ -58,13 +49,12 @@
         overflow: hidden;
       }
 
-      /* ── Leading Section ── */
       .leading-section {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 48px;
+        gap: 32px;
       }
 
       .head-group {
@@ -81,25 +71,12 @@
         height: 32px;
       }
 
-      .id-card {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 6px 12px;
-        background: #18181b;
-        border-radius: 8px;
-        font-family: 'Pretendard', sans-serif;
-        font-size: 12px;
-        font-weight: 500;
-        line-height: 16px;
-        color: #94969C;
-      }
-
       .title-group {
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
+        gap: 4px;
       }
 
       .title-group .title {
@@ -121,7 +98,24 @@
         background-clip: text;
       }
 
-      /* ── Button Group ── */
+      .qr-container {
+        width: 240px;
+        height: 240px;
+        padding: 16px;
+        background: white;
+        border-radius: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .qr-container canvas,
+      .qr-container img {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+      }
+
       .button-group {
         width: 100%;
         display: flex;
@@ -144,40 +138,17 @@
         font-family: inherit;
         text-align: left;
         transition: transform 0.1s;
+        text-decoration: none;
       }
 
       .btn:active {
         transform: translateY(1px);
       }
 
-      .btn-primary {
-        background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
-        box-shadow: inset 2px 2px 4px 0 rgba(255,255,255,0.10);
-        outline: 1px solid rgba(255,255,255,0.2);
-        outline-offset: -1px;
-      }
-
       .btn-secondary {
         background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
         outline: 1px solid rgba(255,255,255,0.1);
         outline-offset: -1px;
-      }
-
-      .btn .app-icon {
-        width: 24px;
-        height: 24px;
-        border-radius: 8px;
-        outline: 1px solid rgba(255,255,255,0.2);
-        outline-offset: -1px;
-        overflow: hidden;
-        flex-shrink: 0;
-      }
-
-      .btn .app-icon img {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
       }
 
       .btn .icon-left {
@@ -201,14 +172,6 @@
         color: #94969C;
       }
 
-      .btn-primary .text-group .action {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 20px;
-        color: #D1FF54;
-      }
-
       .btn-secondary .text-group .action {
         font-family: 'Pretendard', sans-serif;
         font-size: 14px;
@@ -230,38 +193,40 @@
         align-items: center;
         overflow: hidden;
         flex-shrink: 0;
-      }
-
-      .btn-primary .chip {
-        background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, white 100%);
-      }
-
-      .btn-primary .chip svg {
-        color: #0a0a0a;
-      }
-
-      .btn-secondary .chip {
         background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
         outline: 1px solid rgba(255,255,255,0.1);
         outline-offset: -1px;
       }
 
-      .btn-secondary .chip svg {
+      .btn .chip svg {
+        width: 20px;
+        height: 20px;
         color: #C1C2C5;
       }
 
-      .chip svg {
-        width: 20px;
-        height: 20px;
-      }
-
-      /* ── Footer ── */
       .footer {
         padding-bottom: 56px;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 12px;
+      }
+
+      .footer .browse-link {
+        font-family: 'Pretendard', sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 16px;
+        color: white;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.05);
+        transition: background 0.15s;
+      }
+
+      .footer .browse-link:hover {
+        background: rgba(255,255,255,0.1);
       }
 
       .footer .copyright,
@@ -279,94 +244,47 @@
       }
     </style>
 
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script>
-      const IOS_STORE = "https://apps.apple.com/kr/app/%EC%95%84%ED%82%A4%ED%8C%8C%EC%9D%B4/id6751454780";
-      const ANDROID_STORE = "https://play.google.com/store/apps/details?id=com.jammering.akify";
-      const LANDING = "https://akify.io";
-
-      function parsePostId() {
-        const match = window.location.pathname.match(/^\/merchandise\/([^/?#]+)/);
-        return match ? decodeURIComponent(match[1]) : null;
-      }
-
-      function detectEnv() {
-        const ua = navigator.userAgent || "";
-        const isAndroid = /Android/i.test(ua);
-        const isIOS = /iPhone|iPad|iPod/i.test(ua);
-        const isMobile = isAndroid || isIOS;
-        return { isAndroid, isIOS, isMobile };
-      }
-
-      function init() {
-        const { isAndroid, isIOS, isMobile } = detectEnv();
-        const postId = parsePostId();
-        const idValue = document.getElementById("post-id");
-        if (postId && idValue) {
-          idValue.textContent = postId;
+      window.addEventListener("DOMContentLoaded", function () {
+        var qrContainer = document.getElementById("qr");
+        if (qrContainer && window.QRCode) {
+          new QRCode(qrContainer, {
+            text: window.location.href,
+            width: 208,
+            height: 208,
+            colorDark: "#0a0a0a",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.M,
+          });
         }
 
-        // PC면 바로 랜딩 페이지로 보내기
-        if (!isMobile) {
-          window.location.replace(LANDING);
-          return;
+        var iosBtn = document.getElementById("ios-btn");
+        var androidBtn = document.getElementById("android-btn");
+        var browseBtn = document.getElementById("browse-btn");
+        var search = window.location.search;
+
+        if (iosBtn) {
+          iosBtn.href = "https://apps.apple.com/kr/app/%EC%95%84%ED%82%A4%ED%8C%8C%EC%9D%B4/id6751454780" + search;
         }
-
-        // 페이지 진입 시 자동으로 앱 열기 1회 시도
-        if (postId) {
-          if (isIOS) {
-            window.location.href = `akify://merchandise/${postId}`;
-          } else if (isAndroid) {
-            const intentUrl = `intent://merchandise/${postId}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(window.location.href)};end`;
-            window.location.href = intentUrl;
+        if (androidBtn) {
+          var androidUrl = "https://play.google.com/store/apps/details?id=com.jammering.akify";
+          if (search) {
+            var utm = search.substring(1);
+            androidUrl += "&referrer=" + encodeURIComponent(utm);
           }
+          androidBtn.href = androidUrl;
         }
-
-        const openAppBtn = document.getElementById("open-app-btn");
-        const storeBtn = document.getElementById("store-btn");
-
-        openAppBtn.onclick = () => {
-          const postId = parsePostId();
-          if (isIOS) {
-            const appScheme = `akify://merchandise/${postId || ''}`;
-            window.location.href = appScheme;
-            setTimeout(() => {
-              if (!document.hidden) {
-                if (confirm('앱이 설치되어 있지 않거나 실행할 수 없습니다.\nApp Store로 이동하시겠습니까?')) {
-                  window.location.href = IOS_STORE;
-                }
-              }
-            }, 2000);
-          } else if (isAndroid) {
-            const currentUrl = window.location.href;
-            const intentUrl = `intent://merchandise/${postId || ''}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(currentUrl)};end`;
-            try {
-              window.location.href = intentUrl;
-            } catch (e) {
-              window.location.href = currentUrl;
-            }
-          }
-        };
-
-        storeBtn.onclick = () => {
-          if (isIOS) {
-            window.location.href = IOS_STORE;
-          } else if (isAndroid) {
-            window.location.href = ANDROID_STORE;
-          } else {
-            window.location.href = LANDING;
-          }
-        };
-      }
-
-      window.addEventListener("DOMContentLoaded", init);
+        if (browseBtn) {
+          browseBtn.href = "https://akify.io" + search;
+        }
+      });
     </script>
   </head>
   <body>
     <div class="index">
-      <!-- Leading Section -->
       <div class="leading-section">
         <div class="head-group">
-          <!-- Logotype -->
           <div class="logotype">
             <svg width="150" height="32" viewBox="0 0 150 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0)">
@@ -383,51 +301,46 @@
               </defs>
             </svg>
           </div>
-          <!-- ID Card -->
-          <div class="id-card">
-            <span>매물 ID :</span>
-            <span id="post-id">알 수 없음</span>
-          </div>
         </div>
 
-        <!-- Title -->
         <div class="title-group">
-          <div class="title">앱에서 매물 상세를 확인해 주세요!</div>
-          <div class="description">아키파이 앱에서 매물 상세를 보기 위한 링크입니다.</div>
+          <div class="title">AKIFY 앱 설치하기</div>
+          <div class="description">휴대폰 카메라로 QR을 스캔하세요</div>
         </div>
 
-        <!-- Buttons -->
+        <div id="qr" class="qr-container"></div>
+
         <div class="button-group">
-          <!-- 앱에서 보기 -->
-          <button class="btn btn-primary" id="open-app-btn">
-            <div class="app-icon">
-              <img src="../assets/image-app-icon.png" alt="AKIFY" />
-            </div>
+          <a class="btn btn-secondary" id="ios-btn" href="#">
+            <svg class="icon-left" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+            </svg>
             <div class="text-group">
-              <span class="label">AKIFY App</span>
-              <span class="action">앱에서 보기</span>
+              <span class="label">Apple</span>
+              <span class="action">App Store</span>
             </div>
             <div class="chip">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 7l-10 10" /><path d="M8 7l9 0l0 9" /></svg>
             </div>
-          </button>
+          </a>
 
-          <!-- 앱 설치하고 매물 보기 -->
-          <button class="btn btn-secondary" id="store-btn">
-            <svg class="icon-left" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M5.001 8h13.999a2 2 0 0 1 1.977 2.304l-1.255 7.152a3 3 0 0 1 -2.966 2.544h-9.512a3 3 0 0 1 -2.965 -2.544l-1.255 -7.152a2 2 0 0 1 1.977 -2.304" /><path d="M17 10l-2 -6" /><path d="M7 10l2 -6" /></svg>
+          <a class="btn btn-secondary" id="android-btn" href="#">
+            <svg class="icon-left" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 20.5V3.499c0-.864.985-1.357 1.674-.835l11.659 8.501c.553.418.553 1.252 0 1.67l-11.659 8.5c-.689.523-1.674.03-1.674-.835z"/>
+            </svg>
             <div class="text-group">
-              <span class="label">Download</span>
-              <span class="action">앱 설치하고 매물 보기</span>
+              <span class="label">Google</span>
+              <span class="action">Play Store</span>
             </div>
             <div class="chip">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 7l-10 10" /><path d="M8 7l9 0l0 9" /></svg>
             </div>
-          </button>
+          </a>
         </div>
       </div>
 
-      <!-- Footer -->
       <div class="footer">
+        <a id="browse-btn" href="https://akify.io" class="browse-link">AKIFY 둘러보기 →</a>
         <div class="copyright">2026 Jammering™ All Rights reserved.</div>
         <a href="mailto:info@jammering.com" class="contact">문의: info@jammering.com</a>
       </div>
