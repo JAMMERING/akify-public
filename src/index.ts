@@ -20,6 +20,7 @@ interface MerchandiseMeta {
 }
 
 const FACEBOOK_DOMAIN_TOKEN = '54nz01x5m0hglaaznfk4fxdy2m7jpc';
+const NAVER_VERIFICATION_FILE = 'navere3fe7590e547597777aab27426f7080c.html';
 const FALLBACK_OG_IMAGE = 'https://go.akify.io/assets/opengraph.jpg';
 const WEB_BASE = 'https://web.akify.io';
 
@@ -43,6 +44,12 @@ export default {
     if (url.pathname === `/${FACEBOOK_DOMAIN_TOKEN}.html`) {
       return new Response(FACEBOOK_DOMAIN_TOKEN, {
         headers: { 'content-type': 'text/plain; charset=utf-8' },
+      });
+    }
+
+    if (url.pathname === `/${NAVER_VERIFICATION_FILE}`) {
+      return new Response(`naver-site-verification: ${NAVER_VERIFICATION_FILE}`, {
+        headers: { 'content-type': 'text/html; charset=utf-8' },
       });
     }
 
