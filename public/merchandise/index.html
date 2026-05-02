@@ -114,17 +114,21 @@
         document.body.classList.add('fallback-revealed');
 
         if (postId) {
-          if (isIOS) {
-            window.location.href = `akify://merchandise/${postId}`;
-            setTimeout(() => {
-              if (!document.hidden) {
-                window.location.replace(webFallback);
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              if (isIOS) {
+                window.location.href = `akify://merchandise/${postId}`;
+                setTimeout(() => {
+                  if (!document.hidden) {
+                    window.location.replace(webFallback);
+                  }
+                }, IOS_SCHEME_TIMEOUT_MS);
+              } else if (isAndroid) {
+                const intentUrl = `intent://merchandise/${postId}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(webFallback)};end`;
+                window.location.href = intentUrl;
               }
-            }, IOS_SCHEME_TIMEOUT_MS);
-          } else if (isAndroid) {
-            const intentUrl = `intent://merchandise/${postId}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(webFallback)};end`;
-            window.location.href = intentUrl;
-          }
+            });
+          });
         }
       }
 
