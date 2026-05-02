@@ -1,4 +1,3 @@
-// Google Analytics 4 — go.akify.io (브릿지 웹)
 (function () {
   var GA_ID = 'G-YL9NFJCK40';
 
