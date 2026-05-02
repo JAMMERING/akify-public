@@ -15,6 +15,7 @@ interface MerchandiseDetailResponse {
 
 interface MerchandiseMeta {
   title: string;
+  pageTitle?: string;
   description: string;
   image: string;
 }
@@ -91,12 +92,13 @@ async function handleMerchandise(
 
   const finalMeta: MerchandiseMeta = meta ?? {
     title: '아키파이',
-    description: '악기 거래를 위한 가장 확실한 방법',
+    pageTitle: '아키파이 | 악기 매물 보기',
+    description: '아키파이에서 해당 악기 매물을 확인해 보세요!',
     image: FALLBACK_OG_IMAGE,
   };
 
   const transformed = new HTMLRewriter()
-    .on('title', new TitleHandler(finalMeta.title))
+    .on('title', new TitleHandler(finalMeta.pageTitle ?? finalMeta.title))
     .on('head', new HeadHandler(finalMeta, canonicalUrl))
     .transform(templateResponse);
 
@@ -192,7 +194,7 @@ class HeadHandler {
     const { title, description, image } = this.meta;
     const tags = [
       `<meta property="og:type" content="product" />`,
-      `<meta property="og:site_name" content="AKIFY" />`,
+      `<meta property="og:site_name" content="아키파이" />`,
       `<meta property="og:locale" content="ko_KR" />`,
       `<meta property="og:url" content="${escapeAttr(this.url)}" />`,
       `<meta property="og:title" content="${escapeAttr(title)}" />`,
