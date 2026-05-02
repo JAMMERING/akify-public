@@ -155,8 +155,21 @@ function generateAnalyticsJs(env: Env): Response {
   window.gtag = function () { dataLayer.push(arguments); };
   gtag('js', new Date());
 
-  var cid = new URLSearchParams(window.location.search).get('_cid');
-  gtag('config', '${env.GA_ID}', cid ? { client_id: cid } : {});
+  var params = new URLSearchParams(window.location.search);
+  var cid = params.get('_cid');
+  var src = params.get('utm_source');
+  var med = params.get('utm_medium');
+  var cnt = params.get('utm_content');
+  var cmp = params.get('utm_campaign');
+  var trm = params.get('utm_term');
+  var config = {};
+  if (cid) config.client_id = cid;
+  if (src) config.campaign_source = src;
+  if (med) config.campaign_medium = med;
+  if (cnt) config.campaign_content = cnt;
+  if (cmp) config.campaign_name = cmp;
+  if (trm) config.campaign_term = trm;
+  gtag('config', '${env.GA_ID}', config);
 
   window.akifyGetClientId = function (callback) {
     gtag('get', '${env.GA_ID}', 'client_id', callback);
