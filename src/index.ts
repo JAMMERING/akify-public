@@ -29,7 +29,11 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
-    if (url.pathname === '/install' || url.pathname === '/install/') {
+    if (url.pathname === '/install/') {
+      return Response.redirect(`${url.origin}/install${url.search}`, 301);
+    }
+
+    if (url.pathname === '/install') {
       return handleInstall(request, env);
     }
 
