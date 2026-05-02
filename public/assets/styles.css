@@ -23,12 +23,74 @@
 
 body {
   font-family: var(--font-poppins), var(--font-pretendard);
-  background: var(--color-neutral-950);
-  color: var(--color-neutral-white);
+  background: var(--color-neutral-white);
+  color: var(--color-neutral-950);
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
   overflow-x: hidden;
+}
+
+body.fallback-revealed {
+  background: var(--color-neutral-950);
+  color: var(--color-neutral-white);
+  align-items: stretch;
+}
+
+.loader-page {
+  display: flex;
+  width: 192px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+body.fallback-revealed .loader-page {
+  display: none;
+}
+
+.loader-page > img {
+  width: 112px;
+  height: 112px;
+  border-radius: 40px;
+  display: block;
+}
+
+.loader-page .loader-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.loader-page .loader-text h1 {
+  font-family: var(--font-pretendard);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  color: var(--color-neutral-950);
+  margin: 0;
+}
+
+.loader-page .loader-text p {
+  font-family: var(--font-pretendard);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--color-neutral-600);
+  margin: 0;
+}
+
+.loader-spinner {
+  width: 24px;
+  height: 24px;
+  color: var(--color-neutral-400);
+  animation: loader-spin 1s linear infinite;
+}
+
+@keyframes loader-spin {
+  to { transform: rotate(360deg); }
 }
 
 .index {
@@ -36,11 +98,15 @@ body {
   max-width: 384px;
   min-height: 100vh;
   padding: 0 16px;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
+}
+
+body.fallback-revealed .index {
+  display: flex;
 }
 
 .leading-section {
@@ -62,6 +128,7 @@ body {
   display: block;
   width: 144px;
   height: 32px;
+  color: var(--color-neutral-600);
 }
 
 .title-group {
@@ -142,10 +209,6 @@ body {
 .btn .app-icon {
   width: 24px;
   height: 24px;
-  border-radius: 8px;
-  outline: 1px solid var(--color-alpha-white-20);
-  outline-offset: -1px;
-  overflow: hidden;
   flex-shrink: 0;
 }
 
@@ -153,7 +216,6 @@ body {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
 }
 
 .btn .text-group {

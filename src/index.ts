@@ -24,18 +24,18 @@ const IOS_STORE =
 const ANDROID_STORE =
   'https://play.google.com/store/apps/details?id=com.jammering.akify';
 const FACEBOOK_DOMAIN_TOKEN = '54nz01x5m0hglaaznfk4fxdy2m7jpc';
-const FALLBACK_OG_IMAGE = 'https://akify.io/opengraph-image.jpg';
+const FALLBACK_OG_IMAGE = 'https://go.akify.io/assets/opengraph.jpg';
 const WEB_BASE = 'https://web.akify.io';
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
-    if (url.pathname === '/install') {
+    if (url.pathname === '/install' || url.pathname === '/install/') {
       return handleInstall(request, env);
     }
 
-    const merchandiseMatch = url.pathname.match(/^\/merchandise\/([^/?#]+)$/);
+    const merchandiseMatch = url.pathname.match(/^\/merchandise\/([^/?#]+)\/?$/);
     if (merchandiseMatch) {
       return handleMerchandise(request, env, merchandiseMatch[1]);
     }
@@ -48,6 +48,11 @@ export default {
       return new Response(FACEBOOK_DOMAIN_TOKEN, {
         headers: { 'content-type': 'text/plain; charset=utf-8' },
       });
+    }
+
+    const assetResponse = await env.ASSETS.fetch(request);
+    if (assetResponse.status !== 404) {
+      return assetResponse;
     }
 
     return Response.redirect(`${WEB_BASE}${url.pathname}${url.search}`, 302);
