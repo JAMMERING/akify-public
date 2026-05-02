@@ -86,29 +86,27 @@ async function handleMerchandise(
   const meta = await fetchMerchandiseMeta(env.API_URL, id);
   const templateResponse = await templatePromise;
 
-  if (!meta) {
-    return new Response(templateResponse.body, {
-      status: templateResponse.status,
-      headers: {
-        'content-type': 'text/html; charset=utf-8',
-        'cache-control': 'public, s-maxage=60',
-      },
-    });
-  }
-
   const url = new URL(request.url);
   const canonicalUrl = `${url.origin}${url.pathname}`;
 
+  const finalMeta: MerchandiseMeta = meta ?? {
+    title: '아키파이',
+    description: '악기 거래를 위한 가장 확실한 방법',
+    image: FALLBACK_OG_IMAGE,
+  };
+
   const transformed = new HTMLRewriter()
-    .on('title', new TitleHandler(meta.title))
-    .on('head', new HeadHandler(meta, canonicalUrl))
+    .on('title', new TitleHandler(finalMeta.title))
+    .on('head', new HeadHandler(finalMeta, canonicalUrl))
     .transform(templateResponse);
 
   return new Response(transformed.body, {
     status: 200,
     headers: {
       'content-type': 'text/html; charset=utf-8',
-      'cache-control': 'public, s-maxage=1800, stale-while-revalidate=86400',
+      'cache-control': meta
+        ? 'public, s-maxage=1800, stale-while-revalidate=86400'
+        : 'public, s-maxage=60',
     },
   });
 }
