@@ -64,6 +64,25 @@
       }
     </style>
 
+    <script>
+      (function () {
+        var ua = navigator.userAgent || '';
+        var isIOS = /iPhone|iPad|iPod/i.test(ua);
+        var isAndroid = /Android/i.test(ua);
+        if (!isIOS && !isAndroid) return;
+        var search = window.location.search;
+        if (isIOS) {
+          window.location.replace('https://apps.apple.com/kr/app/%EC%95%84%ED%82%A4%ED%8C%8C%EC%9D%B4/id6751454780' + search);
+        } else {
+          var androidUrl = 'https://play.google.com/store/apps/details?id=com.jammering.akify';
+          if (search) {
+            androidUrl += '&referrer=' + encodeURIComponent(search.substring(1));
+          }
+          window.location.replace(androidUrl);
+        }
+      })();
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
