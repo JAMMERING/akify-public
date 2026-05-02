@@ -24,7 +24,7 @@ const IOS_STORE =
 const ANDROID_STORE =
   'https://play.google.com/store/apps/details?id=com.jammering.akify';
 const FACEBOOK_DOMAIN_TOKEN = '54nz01x5m0hglaaznfk4fxdy2m7jpc';
-const FALLBACK_OG_IMAGE = 'https://akify.io/opengraph-image.jpg';
+const FALLBACK_OG_IMAGE = 'https://go.akify.io/assets/opengraph.jpg';
 const WEB_BASE = 'https://web.akify.io';
 
 export default {
