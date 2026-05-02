@@ -280,13 +280,18 @@
     </style>
 
     <script>
-      const IOS_STORE = "https://apps.apple.com/kr/app/%EC%95%84%ED%82%A4%ED%8C%8C%EC%9D%B4/id6751454780";
-      const ANDROID_STORE = "https://play.google.com/store/apps/details?id=com.jammering.akify";
-      const LANDING = "https://akify.io";
+      const WEB_BASE = "https://web.akify.io";
+      const IOS_SCHEME_TIMEOUT_MS = 1500;
 
       function parsePostId() {
         const match = window.location.pathname.match(/^\/merchandise\/([^/?#]+)/);
         return match ? decodeURIComponent(match[1]) : null;
+      }
+
+      function buildWebFallback(postId) {
+        return postId
+          ? `${WEB_BASE}/merchandise/${postId}${window.location.search}`
+          : `${WEB_BASE}${window.location.search}`;
       }
 
       function detectEnv() {
@@ -300,23 +305,28 @@
       function init() {
         const { isAndroid, isIOS, isMobile } = detectEnv();
         const postId = parsePostId();
+        const webFallback = buildWebFallback(postId);
+
         const idValue = document.getElementById("post-id");
         if (postId && idValue) {
           idValue.textContent = postId;
         }
 
-        // PC면 바로 랜딩 페이지로 보내기
         if (!isMobile) {
-          window.location.replace(LANDING);
+          window.location.replace(webFallback);
           return;
         }
 
-        // 페이지 진입 시 자동으로 앱 열기 1회 시도
         if (postId) {
           if (isIOS) {
             window.location.href = `akify://merchandise/${postId}`;
+            setTimeout(() => {
+              if (!document.hidden) {
+                window.location.replace(webFallback);
+              }
+            }, IOS_SCHEME_TIMEOUT_MS);
           } else if (isAndroid) {
-            const intentUrl = `intent://merchandise/${postId}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(window.location.href)};end`;
+            const intentUrl = `intent://merchandise/${postId}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(webFallback)};end`;
             window.location.href = intentUrl;
           }
         }
@@ -325,36 +335,21 @@
         const storeBtn = document.getElementById("store-btn");
 
         openAppBtn.onclick = () => {
-          const postId = parsePostId();
           if (isIOS) {
-            const appScheme = `akify://merchandise/${postId || ''}`;
-            window.location.href = appScheme;
+            window.location.href = `akify://merchandise/${postId || ''}`;
             setTimeout(() => {
               if (!document.hidden) {
-                if (confirm('앱이 설치되어 있지 않거나 실행할 수 없습니다.\nApp Store로 이동하시겠습니까?')) {
-                  window.location.href = IOS_STORE;
-                }
+                window.location.replace(webFallback);
               }
-            }, 2000);
+            }, IOS_SCHEME_TIMEOUT_MS);
           } else if (isAndroid) {
-            const currentUrl = window.location.href;
-            const intentUrl = `intent://merchandise/${postId || ''}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(currentUrl)};end`;
-            try {
-              window.location.href = intentUrl;
-            } catch (e) {
-              window.location.href = currentUrl;
-            }
+            const intentUrl = `intent://merchandise/${postId || ''}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(webFallback)};end`;
+            window.location.href = intentUrl;
           }
         };
 
         storeBtn.onclick = () => {
-          if (isIOS) {
-            window.location.href = IOS_STORE;
-          } else if (isAndroid) {
-            window.location.href = ANDROID_STORE;
-          } else {
-            window.location.href = LANDING;
-          }
+          window.location.href = webFallback;
         };
       }
 
