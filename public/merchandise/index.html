@@ -51,7 +51,6 @@
     <script>
       const WEB_BASE = "https://web.akify.io";
       const IOS_SCHEME_TIMEOUT_MS = 1500;
-      const FALLBACK_REVEAL_MS = 5000;
 
       function parsePostId() {
         const match = window.location.pathname.match(/^\/merchandise\/([^/?#]+)/);
@@ -72,41 +71,7 @@
         return { isAndroid, isIOS, isMobile };
       }
 
-      function init() {
-        const { isAndroid, isIOS, isMobile } = detectEnv();
-        const postId = parsePostId();
-        const webFallback = buildWebFallback(postId);
-
-        const idValue = document.getElementById("post-id");
-        if (postId && idValue) {
-          idValue.textContent = postId;
-        }
-
-        if (!isMobile) {
-          window.location.replace(webFallback);
-          return;
-        }
-
-        if (postId) {
-          if (isIOS) {
-            window.location.href = `akify://merchandise/${postId}`;
-            setTimeout(() => {
-              if (!document.hidden) {
-                window.location.replace(webFallback);
-              }
-            }, IOS_SCHEME_TIMEOUT_MS);
-          } else if (isAndroid) {
-            const intentUrl = `intent://merchandise/${postId}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(webFallback)};end`;
-            window.location.href = intentUrl;
-          }
-        }
-
-        setTimeout(() => {
-          if (!document.hidden) {
-            document.body.classList.remove('loader-state');
-          }
-        }, FALLBACK_REVEAL_MS);
-
+      function attachButtonHandlers(isIOS, isAndroid, postId, webFallback) {
         const openAppBtn = document.getElementById("open-app-btn");
         const storeBtn = document.getElementById("store-btn");
 
@@ -127,6 +92,42 @@
         storeBtn.onclick = () => {
           window.location.href = webFallback;
         };
+      }
+
+      function init() {
+        const { isAndroid, isIOS, isMobile } = detectEnv();
+        const postId = parsePostId();
+        const webFallback = buildWebFallback(postId);
+
+        const idValue = document.getElementById("post-id");
+        if (postId && idValue) {
+          idValue.textContent = postId;
+        }
+
+        attachButtonHandlers(isIOS, isAndroid, postId, webFallback);
+
+        if (!isMobile) {
+          window.location.replace(webFallback);
+          return;
+        }
+
+        if (postId) {
+          if (isIOS) {
+            window.location.href = `akify://merchandise/${postId}`;
+            setTimeout(() => {
+              if (!document.hidden) {
+                window.location.replace(webFallback);
+              }
+            }, IOS_SCHEME_TIMEOUT_MS);
+            return;
+          } else if (isAndroid) {
+            const intentUrl = `intent://merchandise/${postId}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(webFallback)};end`;
+            window.location.href = intentUrl;
+            return;
+          }
+        }
+
+        document.body.classList.remove('loader-state');
       }
 
       window.addEventListener("DOMContentLoaded", init);
