@@ -62,6 +62,7 @@ body {
   display: block;
   width: 144px;
   height: 32px;
+  color: var(--color-neutral-600);
 }
 
 .title-group {
