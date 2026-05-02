@@ -111,6 +111,8 @@
           return;
         }
 
+        document.body.classList.add('fallback-revealed');
+
         if (postId) {
           if (isIOS) {
             window.location.href = `akify://merchandise/${postId}`;
@@ -119,21 +121,17 @@
                 window.location.replace(webFallback);
               }
             }, IOS_SCHEME_TIMEOUT_MS);
-            return;
           } else if (isAndroid) {
             const intentUrl = `intent://merchandise/${postId}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(webFallback)};end`;
             window.location.href = intentUrl;
-            return;
           }
         }
-
-        document.body.classList.remove('loader-state');
       }
 
       window.addEventListener("DOMContentLoaded", init);
     </script>
   </head>
-  <body class="loader-state">
+  <body>
     <noscript>
       <img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=1202852544872046&ev=PageView&noscript=1" alt="" />

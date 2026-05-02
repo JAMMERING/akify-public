@@ -74,31 +74,50 @@
       .footer .browse-link:hover {
         background: var(--color-alpha-white-10);
       }
-    </style>
 
-    <script>
-      (function () {
-        var ua = navigator.userAgent || '';
-        var isIOS = /iPhone|iPad|iPod/i.test(ua);
-        var isAndroid = /Android/i.test(ua);
-        if (!isIOS && !isAndroid) return;
-        var search = window.location.search;
-        if (isIOS) {
-          window.location.replace('https://apps.apple.com/kr/app/%EC%95%84%ED%82%A4%ED%8C%8C%EC%9D%B4/id6751454780' + search);
-        } else {
-          var androidUrl = 'https://play.google.com/store/apps/details?id=com.jammering.akify';
-          if (search) {
-            androidUrl += '&referrer=' + encodeURIComponent(search.substring(1));
-          }
-          window.location.replace(androidUrl);
-        }
-      })();
-    </script>
+      body.no-qr .qr-container {
+        display: none;
+      }
+    </style>
 
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
-        document.body.classList.remove('loader-state');
+        document.body.classList.add('fallback-revealed');
+
+        var ua = navigator.userAgent || "";
+        var isIOS = /iPhone|iPad|iPod/i.test(ua);
+        var isAndroid = /Android/i.test(ua);
+        var isMobile = isIOS || isAndroid;
+        var search = window.location.search;
+
+        var iosBtn = document.getElementById("ios-btn");
+        var androidBtn = document.getElementById("android-btn");
+        var browseBtn = document.getElementById("browse-btn");
+
+        if (iosBtn) {
+          iosBtn.href = "https://apps.apple.com/kr/app/%EC%95%84%ED%82%A4%ED%8C%8C%EC%9D%B4/id6751454780" + search;
+        }
+        if (androidBtn) {
+          var androidUrl = "https://play.google.com/store/apps/details?id=com.jammering.akify";
+          if (search) {
+            androidUrl += "&referrer=" + encodeURIComponent(search.substring(1));
+          }
+          androidBtn.href = androidUrl;
+        }
+        if (browseBtn) {
+          browseBtn.href = "https://akify.io" + search;
+        }
+
+        if (isMobile) {
+          document.body.classList.add('no-qr');
+          if (isIOS) {
+            window.location.replace(iosBtn.href);
+          } else {
+            window.location.replace(androidBtn.href);
+          }
+          return;
+        }
 
         var qrContainer = document.getElementById("qr");
         if (qrContainer && window.QRCode) {
@@ -111,30 +130,10 @@
             correctLevel: QRCode.CorrectLevel.M,
           });
         }
-
-        var iosBtn = document.getElementById("ios-btn");
-        var androidBtn = document.getElementById("android-btn");
-        var browseBtn = document.getElementById("browse-btn");
-        var search = window.location.search;
-
-        if (iosBtn) {
-          iosBtn.href = "https://apps.apple.com/kr/app/%EC%95%84%ED%82%A4%ED%8C%8C%EC%9D%B4/id6751454780" + search;
-        }
-        if (androidBtn) {
-          var androidUrl = "https://play.google.com/store/apps/details?id=com.jammering.akify";
-          if (search) {
-            var utm = search.substring(1);
-            androidUrl += "&referrer=" + encodeURIComponent(utm);
-          }
-          androidBtn.href = androidUrl;
-        }
-        if (browseBtn) {
-          browseBtn.href = "https://akify.io" + search;
-        }
       });
     </script>
   </head>
-  <body class="loader-state">
+  <body>
     <noscript>
       <img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=1202852544872046&ev=PageView&noscript=1" alt="" />
