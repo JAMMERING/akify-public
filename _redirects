@@ -1,3 +1,2 @@
-/54nz01x5m0hglaaznfk4fxdy2m7jpc.html  /54nz01x5m0hglaaznfk4fxdy2m7jpc.html  200
-/merchandise/*   /merchandise/index.html   200
-/download/       /download                 301
+/download                       /dl                              301
+/*                              https://web.akify.io/:splat       302
