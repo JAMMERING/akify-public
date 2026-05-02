@@ -17,92 +17,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="/assets/styles.css" />
 
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: 'Poppins', 'Pretendard', system-ui, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #0a0a0a;
-        color: white;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        overflow-x: hidden;
-      }
-
-      .index {
-        width: 100%;
-        max-width: 384px;
-        min-height: 100vh;
-        padding: 0 16px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        overflow: hidden;
-      }
-
       .leading-section {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         gap: 32px;
       }
 
-      .head-group {
-        padding-top: 56px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .logotype svg {
-        display: block;
-        width: 144px;
-        height: 32px;
-      }
-
       .title-group {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
         gap: 4px;
-      }
-
-      .title-group .title {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 36px;
-        color: white;
-      }
-
-      .title-group .description {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 16px;
-        background: linear-gradient(to right, #ffffff, #6D6D6D);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
       }
 
       .qr-container {
         width: 240px;
         height: 240px;
         padding: 16px;
-        background: white;
+        background: var(--color-neutral-white);
         border-radius: 16px;
         display: flex;
         justify-content: center;
@@ -116,131 +46,21 @@
         display: block;
       }
 
-      .button-group {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .btn {
-        width: 100%;
-        padding: 12px;
-        position: relative;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        overflow: hidden;
-        cursor: pointer;
-        border: none;
-        font-family: inherit;
-        text-align: left;
-        transition: transform 0.1s;
-        text-decoration: none;
-      }
-
-      .btn:active {
-        transform: translateY(1px);
-      }
-
-      .btn-secondary {
-        background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
-        outline: 1px solid rgba(255,255,255,0.1);
-        outline-offset: -1px;
-      }
-
-      .btn .icon-left {
-        width: 24px;
-        height: 24px;
-        flex-shrink: 0;
-        color: #94969C;
-      }
-
-      .btn .text-group {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .btn .text-group .label {
-        font-family: 'Poppins', sans-serif;
-        font-size: 12px;
-        font-weight: 300;
-        line-height: 16px;
-        color: #94969C;
-      }
-
-      .btn-secondary .text-group .action {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 20px;
-        color: white;
-      }
-
-      .btn .chip {
-        width: 28px;
-        height: 28px;
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        flex-shrink: 0;
-        background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
-        outline: 1px solid rgba(255,255,255,0.1);
-        outline-offset: -1px;
-      }
-
-      .btn .chip svg {
-        width: 20px;
-        height: 20px;
-        color: #C1C2C5;
-      }
-
-      .footer {
-        padding-bottom: 56px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-
       .footer .browse-link {
-        font-family: 'Pretendard', sans-serif;
+        font-family: var(--font-pretendard);
         font-size: 12px;
         font-weight: 500;
         line-height: 16px;
-        color: white;
+        color: var(--color-neutral-white);
         text-decoration: none;
         padding: 8px 16px;
         border-radius: 8px;
-        background: rgba(255,255,255,0.05);
+        background: var(--color-alpha-white-05);
         transition: background 0.15s;
       }
 
       .footer .browse-link:hover {
-        background: rgba(255,255,255,0.1);
-      }
-
-      .footer .copyright,
-      .footer .contact {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 16px;
-        color: #94969C;
-        text-decoration: none;
-      }
-
-      .footer .contact:hover {
-        text-decoration: underline;
+        background: var(--color-alpha-white-10);
       }
     </style>
 

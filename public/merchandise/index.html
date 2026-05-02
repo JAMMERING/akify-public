@@ -7,17 +7,15 @@
 
     <script src="/assets/analytics.js"></script>
 
-    <!-- iOS Smart App Banner -->
     <meta name="apple-itunes-app" content="app-id=6751454780" />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="/assets/styles.css" />
 
     <script>
-      // Smart App Banner에 현재 URL을 전달하도록 동적 설정
       (function() {
         const currentUrl = window.location.href;
         const metaTag = document.querySelector('meta[name="apple-itunes-app"]');
@@ -28,57 +26,8 @@
     </script>
 
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: 'Poppins', 'Pretendard', system-ui, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #0a0a0a;
-        color: white;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        overflow-x: hidden;
-      }
-
-      .index {
-        width: 100%;
-        max-width: 384px;
-        min-height: 100vh;
-        padding: 0 16px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        overflow: hidden;
-      }
-
-      /* ── Leading Section ── */
       .leading-section {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         gap: 48px;
-      }
-
-      .head-group {
-        padding-top: 56px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .logotype svg {
-        display: block;
-        width: 144px;
-        height: 32px;
       }
 
       .id-card {
@@ -86,207 +35,29 @@
         align-items: center;
         gap: 4px;
         padding: 6px 12px;
-        background: #18181b;
+        background: var(--color-neutral-900);
         border-radius: 8px;
-        font-family: 'Pretendard', sans-serif;
+        font-family: var(--font-pretendard);
         font-size: 12px;
         font-weight: 500;
         line-height: 16px;
-        color: #94969C;
-      }
-
-      .title-group {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .title-group .title {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 36px;
-        color: white;
-      }
-
-      .title-group .description {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 16px;
-        background: linear-gradient(to right, #ffffff, #6D6D6D);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      /* ── Button Group ── */
-      .button-group {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .btn {
-        width: 100%;
-        padding: 12px;
-        position: relative;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        overflow: hidden;
-        cursor: pointer;
-        border: none;
-        font-family: inherit;
-        text-align: left;
-        transition: transform 0.1s;
-      }
-
-      .btn:active {
-        transform: translateY(1px);
-      }
-
-      .btn-primary {
-        background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
-        box-shadow: inset 2px 2px 4px 0 rgba(255,255,255,0.10);
-        outline: 1px solid rgba(255,255,255,0.2);
-        outline-offset: -1px;
-      }
-
-      .btn-secondary {
-        background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
-        outline: 1px solid rgba(255,255,255,0.1);
-        outline-offset: -1px;
-      }
-
-      .btn .app-icon {
-        width: 24px;
-        height: 24px;
-        border-radius: 8px;
-        outline: 1px solid rgba(255,255,255,0.2);
-        outline-offset: -1px;
-        overflow: hidden;
-        flex-shrink: 0;
-      }
-
-      .btn .app-icon img {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
-      }
-
-      .btn .icon-left {
-        width: 24px;
-        height: 24px;
-        flex-shrink: 0;
-        color: #94969C;
-      }
-
-      .btn .text-group {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .btn .text-group .label {
-        font-family: 'Poppins', sans-serif;
-        font-size: 12px;
-        font-weight: 300;
-        line-height: 16px;
-        color: #94969C;
-      }
-
-      .btn-primary .text-group .action {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 20px;
-        color: #D1FF54;
-      }
-
-      .btn-secondary .text-group .action {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 20px;
-        color: white;
-      }
-
-      .btn .chip {
-        width: 28px;
-        height: 28px;
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        flex-shrink: 0;
-      }
-
-      .btn-primary .chip {
-        background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, white 100%);
-      }
-
-      .btn-primary .chip svg {
-        color: #0a0a0a;
-      }
-
-      .btn-secondary .chip {
-        background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
-        outline: 1px solid rgba(255,255,255,0.1);
-        outline-offset: -1px;
-      }
-
-      .btn-secondary .chip svg {
-        color: #C1C2C5;
-      }
-
-      .chip svg {
-        width: 20px;
-        height: 20px;
-      }
-
-      /* ── Footer ── */
-      .footer {
-        padding-bottom: 56px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .footer .copyright,
-      .footer .contact {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 16px;
-        color: #94969C;
-        text-decoration: none;
-      }
-
-      .footer .contact:hover {
-        text-decoration: underline;
+        color: var(--color-neutral-600);
       }
     </style>
 
     <script>
-      const IOS_STORE = "https://apps.apple.com/kr/app/%EC%95%84%ED%82%A4%ED%8C%8C%EC%9D%B4/id6751454780";
-      const ANDROID_STORE = "https://play.google.com/store/apps/details?id=com.jammering.akify";
-      const LANDING = "https://akify.io";
+      const WEB_BASE = "https://web.akify.io";
+      const IOS_SCHEME_TIMEOUT_MS = 1500;
 
       function parsePostId() {
         const match = window.location.pathname.match(/^\/merchandise\/([^/?#]+)/);
         return match ? decodeURIComponent(match[1]) : null;
+      }
+
+      function buildWebFallback(postId) {
+        return postId
+          ? `${WEB_BASE}/merchandise/${postId}${window.location.search}`
+          : `${WEB_BASE}${window.location.search}`;
       }
 
       function detectEnv() {
@@ -300,23 +71,28 @@
       function init() {
         const { isAndroid, isIOS, isMobile } = detectEnv();
         const postId = parsePostId();
+        const webFallback = buildWebFallback(postId);
+
         const idValue = document.getElementById("post-id");
         if (postId && idValue) {
           idValue.textContent = postId;
         }
 
-        // PC면 바로 랜딩 페이지로 보내기
         if (!isMobile) {
-          window.location.replace(LANDING);
+          window.location.replace(webFallback);
           return;
         }
 
-        // 페이지 진입 시 자동으로 앱 열기 1회 시도
         if (postId) {
           if (isIOS) {
             window.location.href = `akify://merchandise/${postId}`;
+            setTimeout(() => {
+              if (!document.hidden) {
+                window.location.replace(webFallback);
+              }
+            }, IOS_SCHEME_TIMEOUT_MS);
           } else if (isAndroid) {
-            const intentUrl = `intent://merchandise/${postId}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(window.location.href)};end`;
+            const intentUrl = `intent://merchandise/${postId}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(webFallback)};end`;
             window.location.href = intentUrl;
           }
         }
@@ -325,36 +101,21 @@
         const storeBtn = document.getElementById("store-btn");
 
         openAppBtn.onclick = () => {
-          const postId = parsePostId();
           if (isIOS) {
-            const appScheme = `akify://merchandise/${postId || ''}`;
-            window.location.href = appScheme;
+            window.location.href = `akify://merchandise/${postId || ''}`;
             setTimeout(() => {
               if (!document.hidden) {
-                if (confirm('앱이 설치되어 있지 않거나 실행할 수 없습니다.\nApp Store로 이동하시겠습니까?')) {
-                  window.location.href = IOS_STORE;
-                }
+                window.location.replace(webFallback);
               }
-            }, 2000);
+            }, IOS_SCHEME_TIMEOUT_MS);
           } else if (isAndroid) {
-            const currentUrl = window.location.href;
-            const intentUrl = `intent://merchandise/${postId || ''}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(currentUrl)};end`;
-            try {
-              window.location.href = intentUrl;
-            } catch (e) {
-              window.location.href = currentUrl;
-            }
+            const intentUrl = `intent://merchandise/${postId || ''}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(webFallback)};end`;
+            window.location.href = intentUrl;
           }
         };
 
         storeBtn.onclick = () => {
-          if (isIOS) {
-            window.location.href = IOS_STORE;
-          } else if (isAndroid) {
-            window.location.href = ANDROID_STORE;
-          } else {
-            window.location.href = LANDING;
-          }
+          window.location.href = webFallback;
         };
       }
 
