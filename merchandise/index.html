@@ -7,17 +7,15 @@
 
     <script src="/assets/analytics.js"></script>
 
-    <!-- iOS Smart App Banner -->
     <meta name="apple-itunes-app" content="app-id=6751454780" />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="/assets/styles.css" />
 
     <script>
-      // Smart App Banner에 현재 URL을 전달하도록 동적 설정
       (function() {
         const currentUrl = window.location.href;
         const metaTag = document.querySelector('meta[name="apple-itunes-app"]');
@@ -28,57 +26,8 @@
     </script>
 
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: 'Poppins', 'Pretendard', system-ui, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #0a0a0a;
-        color: white;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        overflow-x: hidden;
-      }
-
-      .index {
-        width: 100%;
-        max-width: 384px;
-        min-height: 100vh;
-        padding: 0 16px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        overflow: hidden;
-      }
-
-      /* ── Leading Section ── */
       .leading-section {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         gap: 48px;
-      }
-
-      .head-group {
-        padding-top: 56px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .logotype svg {
-        display: block;
-        width: 144px;
-        height: 32px;
       }
 
       .id-card {
@@ -86,196 +35,13 @@
         align-items: center;
         gap: 4px;
         padding: 6px 12px;
-        background: #18181b;
+        background: var(--color-neutral-900);
         border-radius: 8px;
-        font-family: 'Pretendard', sans-serif;
+        font-family: var(--font-pretendard);
         font-size: 12px;
         font-weight: 500;
         line-height: 16px;
-        color: #94969C;
-      }
-
-      .title-group {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      .title-group .title {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 36px;
-        color: white;
-      }
-
-      .title-group .description {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 16px;
-        background: linear-gradient(to right, #ffffff, #6D6D6D);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      /* ── Button Group ── */
-      .button-group {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .btn {
-        width: 100%;
-        padding: 12px;
-        position: relative;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        overflow: hidden;
-        cursor: pointer;
-        border: none;
-        font-family: inherit;
-        text-align: left;
-        transition: transform 0.1s;
-      }
-
-      .btn:active {
-        transform: translateY(1px);
-      }
-
-      .btn-primary {
-        background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
-        box-shadow: inset 2px 2px 4px 0 rgba(255,255,255,0.10);
-        outline: 1px solid rgba(255,255,255,0.2);
-        outline-offset: -1px;
-      }
-
-      .btn-secondary {
-        background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
-        outline: 1px solid rgba(255,255,255,0.1);
-        outline-offset: -1px;
-      }
-
-      .btn .app-icon {
-        width: 24px;
-        height: 24px;
-        border-radius: 8px;
-        outline: 1px solid rgba(255,255,255,0.2);
-        outline-offset: -1px;
-        overflow: hidden;
-        flex-shrink: 0;
-      }
-
-      .btn .app-icon img {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
-      }
-
-      .btn .icon-left {
-        width: 24px;
-        height: 24px;
-        flex-shrink: 0;
-        color: #94969C;
-      }
-
-      .btn .text-group {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .btn .text-group .label {
-        font-family: 'Poppins', sans-serif;
-        font-size: 12px;
-        font-weight: 300;
-        line-height: 16px;
-        color: #94969C;
-      }
-
-      .btn-primary .text-group .action {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 20px;
-        color: #D1FF54;
-      }
-
-      .btn-secondary .text-group .action {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 20px;
-        color: white;
-      }
-
-      .btn .chip {
-        width: 28px;
-        height: 28px;
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        flex-shrink: 0;
-      }
-
-      .btn-primary .chip {
-        background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, white 100%);
-      }
-
-      .btn-primary .chip svg {
-        color: #0a0a0a;
-      }
-
-      .btn-secondary .chip {
-        background: radial-gradient(circle at center, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
-        outline: 1px solid rgba(255,255,255,0.1);
-        outline-offset: -1px;
-      }
-
-      .btn-secondary .chip svg {
-        color: #C1C2C5;
-      }
-
-      .chip svg {
-        width: 20px;
-        height: 20px;
-      }
-
-      /* ── Footer ── */
-      .footer {
-        padding-bottom: 56px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .footer .copyright,
-      .footer .contact {
-        font-family: 'Pretendard', sans-serif;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 16px;
-        color: #94969C;
-        text-decoration: none;
-      }
-
-      .footer .contact:hover {
-        text-decoration: underline;
+        color: var(--color-neutral-600);
       }
     </style>
 
