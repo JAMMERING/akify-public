@@ -1,1 +1,14 @@
-.env
+node_modules/
+.wrangler/
+.dev.vars
+.env*
+*.log
+.DS_Store
+
+# yarn berry
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
