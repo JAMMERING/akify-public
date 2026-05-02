@@ -19,10 +19,6 @@ interface MerchandiseMeta {
   image: string;
 }
 
-const IOS_STORE =
-  'https://apps.apple.com/kr/app/%EC%95%84%ED%82%A4%ED%8C%8C%EC%9D%B4/id6751454780';
-const ANDROID_STORE =
-  'https://play.google.com/store/apps/details?id=com.jammering.akify';
 const FACEBOOK_DOMAIN_TOKEN = '54nz01x5m0hglaaznfk4fxdy2m7jpc';
 const FALLBACK_OG_IMAGE = 'https://go.akify.io/assets/opengraph.jpg';
 const WEB_BASE = 'https://web.akify.io';
@@ -61,19 +57,6 @@ export default {
 
 async function handleInstall(request: Request, env: Env): Promise<Response> {
   try {
-    const ua = request.headers.get('user-agent') || '';
-    const url = new URL(request.url);
-    const utm = url.searchParams.toString();
-
-    if (/iPhone|iPad|iPod/.test(ua)) {
-      return Response.redirect(utm ? `${IOS_STORE}?${utm}` : IOS_STORE, 302);
-    }
-
-    if (/Android/.test(ua)) {
-      const referrer = utm ? `&referrer=${encodeURIComponent(utm)}` : '';
-      return Response.redirect(`${ANDROID_STORE}${referrer}`, 302);
-    }
-
     const pageUrl = new URL('/install/index.html', request.url).toString();
     const pageResponse = await env.ASSETS.fetch(pageUrl);
     if (!pageResponse.ok) {

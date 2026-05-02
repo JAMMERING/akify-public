@@ -111,11 +111,12 @@
 
         if (isMobile) {
           document.body.classList.add('no-qr');
-          if (isIOS) {
-            window.location.replace(iosBtn.href);
-          } else {
-            window.location.replace(androidBtn.href);
-          }
+          var storeUrl = isIOS ? iosBtn.href : androidBtn.href;
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              window.location.replace(storeUrl);
+            });
+          });
           return;
         }
 
