@@ -150,7 +150,13 @@ function generateAnalyticsJs(env: Env): Response {
   window.dataLayer = window.dataLayer || [];
   window.gtag = function () { dataLayer.push(arguments); };
   gtag('js', new Date());
-  gtag('config', '${env.GA_ID}');
+
+  var cid = new URLSearchParams(window.location.search).get('_cid');
+  gtag('config', '${env.GA_ID}', cid ? { client_id: cid } : {});
+
+  window.akifyGetClientId = function (callback) {
+    gtag('get', '${env.GA_ID}', 'client_id', callback);
+  };
 })();`);
   }
 
