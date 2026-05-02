@@ -31,11 +31,11 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
-    if (url.pathname === '/install') {
+    if (url.pathname === '/install' || url.pathname === '/install/') {
       return handleInstall(request, env);
     }
 
-    const merchandiseMatch = url.pathname.match(/^\/merchandise\/([^/?#]+)$/);
+    const merchandiseMatch = url.pathname.match(/^\/merchandise\/([^/?#]+)\/?$/);
     if (merchandiseMatch) {
       return handleMerchandise(request, env, merchandiseMatch[1]);
     }
@@ -48,6 +48,11 @@ export default {
       return new Response(FACEBOOK_DOMAIN_TOKEN, {
         headers: { 'content-type': 'text/plain; charset=utf-8' },
       });
+    }
+
+    const assetResponse = await env.ASSETS.fetch(request);
+    if (assetResponse.status !== 404) {
+      return assetResponse;
     }
 
     return Response.redirect(`${WEB_BASE}${url.pathname}${url.search}`, 302);
