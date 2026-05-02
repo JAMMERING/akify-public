@@ -122,16 +122,39 @@
 
         var qrContainer = document.getElementById("qr");
         if (qrContainer && window.QRCode) {
-          new QRCode(qrContainer, {
-            text: window.location.href,
-            width: 208,
-            height: 208,
-            colorDark: "#0a0a0a",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.M,
+          buildQrText(function (text) {
+            new QRCode(qrContainer, {
+              text: text,
+              width: 208,
+              height: 208,
+              colorDark: "#0a0a0a",
+              colorLight: "#ffffff",
+              correctLevel: QRCode.CorrectLevel.M,
+            });
           });
         }
       });
+
+      function buildQrText(callback) {
+        var fallback = window.location.href;
+        if (typeof window.akifyGetClientId !== 'function') {
+          callback(fallback);
+          return;
+        }
+        var done = false;
+        var timer = setTimeout(function () {
+          if (!done) { done = true; callback(fallback); }
+        }, 2000);
+        window.akifyGetClientId(function (cid) {
+          if (done) return;
+          done = true;
+          clearTimeout(timer);
+          if (!cid) return callback(fallback);
+          var url = new URL(fallback);
+          url.searchParams.set('_cid', cid);
+          callback(url.toString());
+        });
+      }
     </script>
   </head>
   <body>
