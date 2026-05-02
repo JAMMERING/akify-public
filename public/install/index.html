@@ -98,6 +98,8 @@
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
+        document.body.classList.remove('loader-state');
+
         var qrContainer = document.getElementById("qr");
         if (qrContainer && window.QRCode) {
           new QRCode(qrContainer, {
@@ -132,11 +134,19 @@
       });
     </script>
   </head>
-  <body>
+  <body class="loader-state">
     <noscript>
       <img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=1202852544872046&ev=PageView&noscript=1" alt="" />
     </noscript>
+    <div class="loader-page">
+      <img src="/assets/app-icons/120.png" alt="" />
+      <div class="loader-text">
+        <h1>아키파이</h1>
+        <p>악기 거래를 위한 가장 확실한 방법</p>
+      </div>
+      <svg class="loader-spinner"><use href="/assets/icons.svg#loader-2" /></svg>
+    </div>
     <div class="index">
       <div class="leading-section">
         <div class="head-group">

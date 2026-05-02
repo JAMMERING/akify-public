@@ -51,6 +51,7 @@
     <script>
       const WEB_BASE = "https://web.akify.io";
       const IOS_SCHEME_TIMEOUT_MS = 1500;
+      const FALLBACK_REVEAL_MS = 5000;
 
       function parsePostId() {
         const match = window.location.pathname.match(/^\/merchandise\/([^/?#]+)/);
@@ -100,6 +101,12 @@
           }
         }
 
+        setTimeout(() => {
+          if (!document.hidden) {
+            document.body.classList.remove('loader-state');
+          }
+        }, FALLBACK_REVEAL_MS);
+
         const openAppBtn = document.getElementById("open-app-btn");
         const storeBtn = document.getElementById("store-btn");
 
@@ -125,11 +132,19 @@
       window.addEventListener("DOMContentLoaded", init);
     </script>
   </head>
-  <body>
+  <body class="loader-state">
     <noscript>
       <img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=1202852544872046&ev=PageView&noscript=1" alt="" />
     </noscript>
+    <div class="loader-page">
+      <img src="/assets/app-icons/120.png" alt="" />
+      <div class="loader-text">
+        <h1>아키파이</h1>
+        <p>악기 거래를 위한 가장 확실한 방법</p>
+      </div>
+      <svg class="loader-spinner"><use href="/assets/icons.svg#loader-2" /></svg>
+    </div>
     <div class="index">
       <!-- Leading Section -->
       <div class="leading-section">
