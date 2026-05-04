@@ -162,7 +162,7 @@ function generateAnalyticsJs(env: Env): Response {
   var cnt = params.get('utm_content');
   var cmp = params.get('utm_campaign');
   var trm = params.get('utm_term');
-  var config = {};
+  var config = { transport_type: 'beacon' };
   if (cid) config.client_id = cid;
   if (src) config.campaign_source = src;
   if (med) config.campaign_medium = med;
@@ -173,6 +173,25 @@ function generateAnalyticsJs(env: Env): Response {
 
   window.akifyGetClientId = function (callback) {
     gtag('get', '${env.GA_ID}', 'client_id', callback);
+  };
+
+  window.akifyTrackedRedirect = function (url, opts) {
+    var timeout = (opts && opts.timeout) || 1500;
+    var done = false;
+    var go = function () {
+      if (done) return;
+      done = true;
+      window.location.replace(url);
+    };
+    setTimeout(go, timeout);
+    try {
+      gtag('event', 'redirect', {
+        transport_type: 'beacon',
+        event_callback: go,
+      });
+    } catch (e) {
+      go();
+    }
   };
 })();`);
   }
