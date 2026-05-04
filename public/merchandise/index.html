@@ -107,7 +107,11 @@
         attachButtonHandlers(isIOS, isAndroid, postId, webFallback);
 
         if (!isMobile) {
-          window.location.replace(webFallback);
+          if (typeof window.akifyTrackedRedirect === 'function') {
+            window.akifyTrackedRedirect(webFallback);
+          } else {
+            window.location.replace(webFallback);
+          }
           return;
         }
 

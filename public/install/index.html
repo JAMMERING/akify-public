@@ -112,11 +112,15 @@
         if (isMobile) {
           document.body.classList.add('no-qr');
           var storeUrl = isIOS ? iosBtn.href : androidBtn.href;
-          requestAnimationFrame(function () {
+          if (typeof window.akifyTrackedRedirect === 'function') {
+            window.akifyTrackedRedirect(storeUrl);
+          } else {
             requestAnimationFrame(function () {
-              window.location.replace(storeUrl);
+              requestAnimationFrame(function () {
+                window.location.replace(storeUrl);
+              });
             });
-          });
+          }
           return;
         }
 
