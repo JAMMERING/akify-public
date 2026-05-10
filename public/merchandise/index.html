@@ -50,7 +50,13 @@
 
     <script>
       const WEB_BASE = "https://web.akify.io";
+      const IOS_STORE = "https://apps.apple.com/kr/app/%EC%95%84%ED%82%A4%ED%8C%8C%EC%9D%B4/id6751454780";
+      const ANDROID_STORE = "https://play.google.com/store/apps/details?id=com.jammering.akify";
       const IOS_SCHEME_TIMEOUT_MS = 1500;
+
+      function isFromWeb() {
+        return document.referrer.includes('web.akify.io/merchandise/');
+      }
 
       function parsePostId() {
         const match = window.location.pathname.match(/^\/merchandise\/([^/?#]+)/);
@@ -71,7 +77,7 @@
         return { isAndroid, isIOS, isMobile };
       }
 
-      function attachButtonHandlers(isIOS, isAndroid, postId, webFallback) {
+      function attachButtonHandlers(isIOS, isAndroid, postId, launchFallback, storeUrl) {
         const openAppBtn = document.getElementById("open-app-btn");
         const storeBtn = document.getElementById("store-btn");
 
@@ -81,17 +87,17 @@
             window.location.href = `akify://merchandise/${postId || ''}${search}`;
             setTimeout(() => {
               if (!document.hidden) {
-                window.location.replace(webFallback);
+                window.location.replace(launchFallback);
               }
             }, IOS_SCHEME_TIMEOUT_MS);
           } else if (isAndroid) {
-            const intentUrl = `intent://merchandise/${postId || ''}${search}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(webFallback)};end`;
+            const intentUrl = `intent://merchandise/${postId || ''}${search}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(launchFallback)};end`;
             window.location.href = intentUrl;
           }
         };
 
         storeBtn.onclick = () => {
-          window.location.href = webFallback;
+          window.location.href = storeUrl;
         };
       }
 
@@ -99,13 +105,16 @@
         const { isAndroid, isIOS, isMobile } = detectEnv();
         const postId = parsePostId();
         const webFallback = buildWebFallback(postId);
+        const cameFromWeb = isFromWeb();
+        const storeUrl = isIOS ? IOS_STORE : ANDROID_STORE;
+        const launchFallback = cameFromWeb ? storeUrl : webFallback;
 
         const idValue = document.getElementById("post-id");
         if (postId && idValue) {
           idValue.textContent = postId;
         }
 
-        attachButtonHandlers(isIOS, isAndroid, postId, webFallback);
+        attachButtonHandlers(isIOS, isAndroid, postId, launchFallback, storeUrl);
 
         if (!isMobile) {
           if (typeof window.akifyTrackedRedirect === 'function') {
@@ -118,7 +127,7 @@
 
         document.body.classList.add('fallback-revealed');
 
-        if (postId) {
+        if (postId && !cameFromWeb) {
           const search = window.location.search;
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
@@ -126,11 +135,11 @@
                 window.location.href = `akify://merchandise/${postId}${search}`;
                 setTimeout(() => {
                   if (!document.hidden) {
-                    window.location.replace(webFallback);
+                    window.location.replace(launchFallback);
                   }
                 }, IOS_SCHEME_TIMEOUT_MS);
               } else if (isAndroid) {
-                const intentUrl = `intent://merchandise/${postId}${search}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(webFallback)};end`;
+                const intentUrl = `intent://merchandise/${postId}${search}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(launchFallback)};end`;
                 window.location.href = intentUrl;
               }
             });
