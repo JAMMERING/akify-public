@@ -54,8 +54,21 @@
       const ANDROID_STORE = "https://play.google.com/store/apps/details?id=com.jammering.akify";
       const IOS_SCHEME_TIMEOUT_MS = 1500;
 
-      function isFromWeb() {
-        return document.referrer.includes('web.akify.io/merchandise/');
+      function shouldSkipWebFallback() {
+        if (document.referrer.includes('web.akify.io/merchandise/')) return true;
+        if (document.referrer.includes('go.akify.io')) return true;
+        if (new URLSearchParams(window.location.search).get('intent') === 'open_app') return true;
+        return false;
+      }
+
+      function launchIosScheme(scheme, fallback) {
+        const start = Date.now();
+        window.location.href = scheme;
+        setTimeout(() => {
+          if (Date.now() - start < IOS_SCHEME_TIMEOUT_MS + 200 && !document.hidden) {
+            window.location.replace(fallback);
+          }
+        }, IOS_SCHEME_TIMEOUT_MS);
       }
 
       function parsePostId() {
@@ -84,12 +97,7 @@
         openAppBtn.onclick = () => {
           const search = window.location.search;
           if (isIOS) {
-            window.location.href = `akify://merchandise/${postId || ''}${search}`;
-            setTimeout(() => {
-              if (!document.hidden) {
-                window.location.replace(launchFallback);
-              }
-            }, IOS_SCHEME_TIMEOUT_MS);
+            launchIosScheme(`akify://merchandise/${postId || ''}${search}`, launchFallback);
           } else if (isAndroid) {
             const intentUrl = `intent://merchandise/${postId || ''}${search}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(launchFallback)};end`;
             window.location.href = intentUrl;
@@ -105,9 +113,9 @@
         const { isAndroid, isIOS, isMobile } = detectEnv();
         const postId = parsePostId();
         const webFallback = buildWebFallback(postId);
-        const cameFromWeb = isFromWeb();
+        const useStoreFallback = shouldSkipWebFallback();
         const storeUrl = isIOS ? IOS_STORE : ANDROID_STORE;
-        const launchFallback = cameFromWeb ? storeUrl : webFallback;
+        const launchFallback = useStoreFallback ? storeUrl : webFallback;
 
         const idValue = document.getElementById("post-id");
         if (postId && idValue) {
@@ -127,17 +135,12 @@
 
         document.body.classList.add('fallback-revealed');
 
-        if (postId && !cameFromWeb) {
+        if (postId) {
           const search = window.location.search;
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
               if (isIOS) {
-                window.location.href = `akify://merchandise/${postId}${search}`;
-                setTimeout(() => {
-                  if (!document.hidden) {
-                    window.location.replace(launchFallback);
-                  }
-                }, IOS_SCHEME_TIMEOUT_MS);
+                launchIosScheme(`akify://merchandise/${postId}${search}`, launchFallback);
               } else if (isAndroid) {
                 const intentUrl = `intent://merchandise/${postId}${search}#Intent;scheme=akify;package=com.jammering.akify;S.browser_fallback_url=${encodeURIComponent(launchFallback)};end`;
                 window.location.href = intentUrl;
